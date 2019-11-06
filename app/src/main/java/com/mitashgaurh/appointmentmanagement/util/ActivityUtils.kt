@@ -1,4 +1,4 @@
-package com.mitashgaurh.cafe.util
+package com.mitashgaurh.appointmentmanagement.util
 
 import android.view.View
 import androidx.fragment.app.Fragment
