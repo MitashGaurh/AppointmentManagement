@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/colorWhite</color>
+    <color name="colorPrimaryDark">@color/colorWhite</color>
+    <color name="colorAccent">#184EA8</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="colorTabUnselected">#6A6A6A</color>
+</resources>
