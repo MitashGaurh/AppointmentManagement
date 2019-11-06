@@ -1,14 +1,14 @@
 package com.mitashgaurh.appointmentmanagement.di
 
-import com.mitashgaurh.appointmentmanagement.view.home.HomeFragment
+import com.mitashgaurh.appointmentmanagement.view.login.LoginFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Suppress("unused")
 @Module
-abstract class FragmentBuildersModule {
+abstract class LoginFragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeHomeFragment(): HomeFragment
+    abstract fun contributeLoginFragment(): LoginFragment
 
 }
