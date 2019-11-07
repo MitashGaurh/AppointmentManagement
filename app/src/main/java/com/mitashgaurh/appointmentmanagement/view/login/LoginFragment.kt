@@ -1,5 +1,6 @@
 package com.mitashgaurh.appointmentmanagement.view.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentLoginBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.view.home.HomeActivity
+import com.mitashgaurh.appointmentmanagement.vo.EventObserver
 import javax.inject.Inject
 
 /**
@@ -26,7 +29,7 @@ class LoginFragment : Fragment(), Injectable {
         mViewModelFactory
     }
 
-    var mBinding by autoCleared<FragmentLoginBinding>()
+    private var mBinding by autoCleared<FragmentLoginBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,15 @@ class LoginFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mBinding.viewModel = mLoginViewModel
+
+        subscribeToViewEvents()
+    }
+
+    private fun subscribeToViewEvents() {
+        mLoginViewModel.mLoginEvent.observe(viewLifecycleOwner, EventObserver {
+            startActivity(Intent(activity, HomeActivity::class.java))
+            activity?.finish()
+        })
     }
 
 }
