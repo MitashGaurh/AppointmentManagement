@@ -17,4 +17,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user")
     fun loadUsers(): LiveData<List<User>>
+
+    @Query("SELECT * FROM user WHERE studentId = :studentId")
+    fun loadUserByStudentId(studentId: Long): LiveData<User>
 }

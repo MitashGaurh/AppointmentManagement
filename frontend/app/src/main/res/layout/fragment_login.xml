@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="showProgress"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.mitashgaurh.appointmentmanagement.view.login.LoginViewModel" />
     </data>
@@ -130,6 +134,7 @@
             android:layout_marginStart="@dimen/dimen_18_dp"
             android:layout_marginEnd="@dimen/dimen_18_dp"
             android:layout_marginBottom="@dimen/dimen_8_dp"
+            android:enabled="@{!showProgress}"
             android:onClick="@{viewModel::onLoginClicked}"
             android:padding="@dimen/dimen_14_dp"
             android:text="@string/txt_login"
@@ -138,6 +143,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_remember_me" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login"
+            app:visibleGone="@{showProgress}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

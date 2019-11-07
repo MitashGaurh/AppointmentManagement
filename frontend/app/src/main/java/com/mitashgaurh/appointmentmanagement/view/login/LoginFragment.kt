@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentLoginBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
+import com.mitashgaurh.appointmentmanagement.util.AppUtils
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
 import com.mitashgaurh.appointmentmanagement.view.home.HomeActivity
-import com.mitashgaurh.appointmentmanagement.vo.EventObserver
+import com.mitashgaurh.appointmentmanagement.vo.Status
 import javax.inject.Inject
 
 /**
@@ -51,14 +53,32 @@ class LoginFragment : Fragment(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mBinding.viewModel = mLoginViewModel
 
+        requestFocusForView()
+
         subscribeToViewEvents()
     }
 
-    private fun subscribeToViewEvents() {
-        mLoginViewModel.mLoginEvent.observe(viewLifecycleOwner, EventObserver {
-            startActivity(Intent(activity, HomeActivity::class.java))
-            activity?.finish()
-        })
+    private fun requestFocusForView() {
+        mBinding.showProgress = false
+        mBinding.textInputLayoutId.requestFocus()
+        activity?.let { AppUtils.showKeyboard(it) }
     }
 
+    private fun subscribeToViewEvents() {
+        mLoginViewModel.mLoginLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.LOADING) {
+                mBinding.showProgress = true
+                mBinding.btnLogin.background.alpha = 180
+                activity?.let { it1 -> AppUtils.hideKeyboard(it1, mBinding.root) }
+            } else if (it.status == Status.SUCCESS && null != it.data) {
+                mBinding.showProgress = false
+                mBinding.btnLogin.background.alpha = 255
+                startActivity(Intent(activity, HomeActivity::class.java))
+                activity?.finish()
+            } else if (it.status == Status.ERROR) {
+                mBinding.showProgress = false
+                mBinding.btnLogin.background.alpha = 255
+            }
+        })
+    }
 }
