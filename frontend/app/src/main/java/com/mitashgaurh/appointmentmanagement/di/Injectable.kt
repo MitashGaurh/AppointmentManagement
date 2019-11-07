@@ -1,0 +1,3 @@
+package com.mitashgaurh.appointmentmanagement.di
+
+interface Injectable
