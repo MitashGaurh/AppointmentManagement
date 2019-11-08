@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:fitsSystemWindows="true"
-                app:collapsedTitleGravity="center"
+                app:collapsedTitleGravity="start"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 

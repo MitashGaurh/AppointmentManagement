@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:fabAlignment="@{currentIsHome}"
-            app:fabAnimationMode="scale"
+            app:fabAnimationMode="slide"
             app:navigationIcon="@drawable/ic_menu">
 
             <ImageButton
