@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,7 +52,44 @@ class BookAppointmentFragment : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        observeViewEvents()
+
         subscribeToLiveData()
+    }
+
+    private fun observeViewEvents() {
+        mBinding.toggleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            val materialButton = mBinding.toggleButtonGroup.findViewById<MaterialButton>(checkedId)
+            if (isChecked) {
+                materialButton.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.colorAccent
+                    )
+                )
+
+                materialButton.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.colorWhite
+                    )
+                )
+            } else {
+                materialButton.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.colorWhite
+                    )
+                )
+                materialButton.setTextColor(
+                    ContextCompat.getColor(
+                        context!!,
+                        R.color.colorAccent
+                    )
+                )
+            }
+        }
     }
 
     private fun subscribeToLiveData() {
@@ -61,12 +99,19 @@ class BookAppointmentFragment : Fragment(), Injectable {
                     val materialButton =
                         MaterialButton(context!!, null, R.attr.materialButtonOutlinedStyle)
                     materialButton.text = appointmentType.type
+                    materialButton.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context!!,
+                            R.color.colorWhite
+                        )
+                    )
                     materialButton.setTextColor(
                         ContextCompat.getColor(
                             context!!,
                             R.color.colorAccent
                         )
                     )
+                    materialButton.id = mBinding.toggleButtonGroup.size
                     materialButton.setStrokeColorResource(R.color.colorAccent)
                     mBinding.toggleButtonGroup.addView(materialButton)
                 }
