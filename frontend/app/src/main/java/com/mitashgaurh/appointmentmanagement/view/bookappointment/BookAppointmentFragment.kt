@@ -61,34 +61,8 @@ class BookAppointmentFragment : Fragment(), Injectable {
     private fun observeViewEvents() {
         mBinding.toggleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             val materialButton = mBinding.toggleButtonGroup.findViewById<MaterialButton>(checkedId)
-            if (isChecked) {
-                materialButton.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context!!,
-                        R.color.colorAccent
-                    )
-                )
-
-                materialButton.setTextColor(
-                    ContextCompat.getColor(
-                        context!!,
-                        R.color.colorWhite
-                    )
-                )
-            } else {
-                materialButton.setBackgroundColor(
-                    ContextCompat.getColor(
-                        context!!,
-                        R.color.colorWhite
-                    )
-                )
-                materialButton.setTextColor(
-                    ContextCompat.getColor(
-                        context!!,
-                        R.color.colorAccent
-                    )
-                )
-            }
+            if (isChecked) selectToggleButton(materialButton)
+            else deselectToggleButton(materialButton)
         }
     }
 
@@ -99,19 +73,10 @@ class BookAppointmentFragment : Fragment(), Injectable {
                     val materialButton =
                         MaterialButton(context!!, null, R.attr.materialButtonOutlinedStyle)
                     materialButton.text = appointmentType.type
-                    materialButton.setBackgroundColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.colorWhite
-                        )
-                    )
-                    materialButton.setTextColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.colorAccent
-                        )
-                    )
+
+                    deselectToggleButton(materialButton)
                     materialButton.id = mBinding.toggleButtonGroup.size
+
                     materialButton.setStrokeColorResource(R.color.colorAccent)
                     mBinding.toggleButtonGroup.addView(materialButton)
                 }
@@ -129,5 +94,35 @@ class BookAppointmentFragment : Fragment(), Injectable {
         })
     }
 
+    private fun selectToggleButton(materialButton: MaterialButton) {
+        materialButton.setBackgroundColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorAccent
+            )
+        )
+
+        materialButton.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorWhite
+            )
+        )
+    }
+
+    private fun deselectToggleButton(materialButton: MaterialButton) {
+        materialButton.setBackgroundColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorWhite
+            )
+        )
+        materialButton.setTextColor(
+            ContextCompat.getColor(
+                context!!,
+                R.color.colorAccent
+            )
+        )
+    }
 
 }
