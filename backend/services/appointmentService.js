@@ -70,7 +70,7 @@ exports.createNewAppointment = (req, res) => {
 exports.getAppointmentHistory = (req, res) => {
     let query = "select appointment_id as appointmentId, student_id as studentId, " +
         "appointment_date as appointmentDate, slot_time as appointmentTime, doctor_name as doctorName, " +
-        "type_name as appointmentType, reason as appointmentReason from appointment_history\n" +
+        "type_name as appointmentType, reason as appointmentReason, appointment_status as appointmentStatus from appointment_history\n" +
         "inner join appointment_slots using (slot_id) \n" +
         "inner join doctors using (doctor_id)\n" +
         "inner join appointment_type using (type_id) \n" +
