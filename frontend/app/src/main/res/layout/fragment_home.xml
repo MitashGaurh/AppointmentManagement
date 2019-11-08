@@ -35,7 +35,8 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:title="@string/txt_my_appointments" />
+                    app:title="@string/txt_my_appointments"
+                    app:titleTextColor="@android:color/secondary_text_light" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

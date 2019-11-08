@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.button.MaterialButton
 import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentBookAppointmentBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
@@ -55,7 +57,19 @@ class BookAppointmentFragment : Fragment(), Injectable {
     private fun subscribeToLiveData() {
         mBookAppointmentViewModel.mAppointmentTypesLiveData.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS && null != it.data && it.data.isNotEmpty()) {
-
+                it.data.forEach { appointmentType ->
+                    val materialButton =
+                        MaterialButton(context!!, null, R.attr.materialButtonOutlinedStyle)
+                    materialButton.text = appointmentType.type
+                    materialButton.setTextColor(
+                        ContextCompat.getColor(
+                            context!!,
+                            R.color.colorAccent
+                        )
+                    )
+                    materialButton.setStrokeColorResource(R.color.colorAccent)
+                    mBinding.toggleButtonGroup.addView(materialButton)
+                }
             } else {
 
             }
