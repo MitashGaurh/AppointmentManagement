@@ -1,5 +1,7 @@
 package com.mitashgaurh.appointmentmanagement.view.home
 
+import android.graphics.Color
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -25,4 +27,16 @@ object HomeBindings {
             ) else ContextCompat.getDrawable(fab.context, R.drawable.ic_arrow_back)
         )
     }
+
+    @JvmStatic
+    @BindingAdapter("app:appointmentStatus")
+    fun setAppointmentStatus(textView: TextView, status: String) {
+        when (status) {
+            "APPROVED" -> textView.setTextColor(Color.GREEN)
+            "CANCELLED" -> textView.setTextColor(Color.RED)
+            "PENDING" -> textView.setTextColor(Color.YELLOW)
+            else -> textView.setTextColor(Color.DKGRAY)
+        }
+    }
+
 }
