@@ -6,7 +6,9 @@ import com.mitashgaurh.appointmentmanagement.api.ApiResponse
 import com.mitashgaurh.appointmentmanagement.api.AppointmentManagementService
 import com.mitashgaurh.appointmentmanagement.api.NetworkBoundResource
 import com.mitashgaurh.appointmentmanagement.db.dao.AppointmentHistoryDao
+import com.mitashgaurh.appointmentmanagement.db.dao.UserDao
 import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
+import com.mitashgaurh.appointmentmanagement.db.entity.User
 import com.mitashgaurh.appointmentmanagement.vo.AppointmentHistoryResponse
 import com.mitashgaurh.appointmentmanagement.vo.Resource
 import javax.inject.Inject
@@ -16,7 +18,8 @@ import javax.inject.Singleton
 class HomeRepository @Inject constructor(
     private val mAppExecutors: AppExecutors,
     private val mService: AppointmentManagementService,
-    private val mAppointmentHistoryDao: AppointmentHistoryDao
+    private val mAppointmentHistoryDao: AppointmentHistoryDao,
+    private val mUserDao: UserDao
 ) {
 
     fun callAppointmentHistoryService(studentId: String): LiveData<Resource<List<AppointmentHistory>>> {
@@ -38,8 +41,10 @@ class HomeRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<AppointmentHistoryResponse>> {
                 return mService.fetchAppointmentHistory(studentId)
             }
-
-
         }.asLiveData()
+    }
+
+    fun loadUserByStudentId(studentId: String): LiveData<User> {
+        return mUserDao.loadUserByStudentId(studentId.toLong())
     }
 }

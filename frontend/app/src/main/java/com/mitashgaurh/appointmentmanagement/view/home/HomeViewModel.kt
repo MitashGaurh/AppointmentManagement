@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
+import com.mitashgaurh.appointmentmanagement.db.entity.User
 import com.mitashgaurh.appointmentmanagement.repository.HomeRepository
 import com.mitashgaurh.appointmentmanagement.util.AbsentLiveData
 import com.mitashgaurh.appointmentmanagement.vo.Event
@@ -22,6 +23,15 @@ class HomeViewModel
                 AbsentLiveData.create()
             } else {
                 mHomeRepository.callAppointmentHistoryService(it.getContentIfNotHandled()!!)
+            }
+        }
+
+    val mUserLiveData: LiveData<User> =
+        Transformations.switchMap(studentIdEvent) {
+            if (null == it) {
+                AbsentLiveData.create()
+            } else {
+                mHomeRepository.loadUserByStudentId(it.getContentIfNotHandled()!!)
             }
         }
 

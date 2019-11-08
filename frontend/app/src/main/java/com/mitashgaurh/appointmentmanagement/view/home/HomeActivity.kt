@@ -39,6 +39,13 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun initBottomAppBar() {
         setSupportActionBar(mBinding.bottomAppBar)
 
+        mBinding.bottomAppBar.setNavigationOnClickListener {
+            NavigationBottomSheet().show(
+                supportFragmentManager,
+                NavigationBottomSheet::class.java.simpleName
+            )
+        }
+
         mBinding.currentIsHome = true
 
         mBinding.fab.setOnClickListener {
