@@ -9,6 +9,10 @@
     <string name="txt_login_with_sjsu_id">Login with sjsu id.</string>
     <string name="txt_welcome">Welcome</string>
     <string name="txt_login">Login</string>
+    <string name="txt_home">Home</string>
+    <string name="txt_my_appointments">My Appointments</string>
+    <string name="txt_full_info">Full Info</string>
+    <string name="txt_create_appointment">Click + to create a new appointment.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

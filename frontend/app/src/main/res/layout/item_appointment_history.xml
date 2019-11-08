@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="appointmentHistory"
+            type="com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dimen_4_dp"
+        app:cardElevation="@dimen/dimen_8_dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+            <TextView
+                android:id="@+id/tv_doctor_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_12_dp"
+                android:text="@{appointmentHistory.doctorName}"
+                android:textSize="@dimen/dimen_18_sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Doctor Name" />
+
+            <TextView
+                android:id="@+id/tv_appointment_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="@dimen/dimen_8_dp"
+                android:text="@{appointmentHistory.appointmentStatus}"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="@dimen/dimen_16_sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_doctor_name"
+                app:layout_constraintBottom_toTopOf="@id/tv_appointment_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                tools:text="Approved" />
+
+            <TextView
+                android:id="@+id/tv_appointment_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16_dp"
+                android:layout_marginEnd="@dimen/dimen_16_dp"
+                android:drawableStart="@drawable/ic_access_time"
+                android:drawablePadding="@dimen/dimen_8_dp"
+                android:drawableTint="@color/colorTabUnselected"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dimen_4_dp"
+                android:paddingBottom="@dimen/dimen_4_dp"
+                android:text="@{appointmentHistory.appointmentTime}"
+                android:textSize="@dimen/dimen_16_sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_appointment_date"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_doctor_name"
+                tools:text="Appointment time" />
+
+            <TextView
+                android:id="@+id/tv_appointment_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16_dp"
+                android:layout_marginEnd="@dimen/dimen_16_dp"
+                android:drawableStart="@drawable/ic_date_range"
+                android:drawablePadding="@dimen/dimen_8_dp"
+                android:drawableTint="@color/colorTabUnselected"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dimen_4_dp"
+                android:paddingBottom="@dimen/dimen_4_dp"
+                android:textSize="@dimen/dimen_16_sp"
+                app:dateToText="@{appointmentHistory.appointmentDate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_appointment_time"
+                tools:text="Appointment date" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.72" />
+
+            <TextView
+                android:id="@+id/tv_appointment_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="@dimen/dimen_8_dp"
+                android:text="@string/txt_full_info"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/dimen_16_sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_appointment_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

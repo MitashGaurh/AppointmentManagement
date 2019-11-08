@@ -12,4 +12,8 @@
     <dimen name="dimen_14_dp">14dp</dimen>
     <dimen name="dimen_20_dp">20dp</dimen>
     <dimen name="dimen_18_dp">18dp</dimen>
+    <dimen name="dimen_16_sp">16sp</dimen>
+    <dimen name="dimen_6_dp">6dp</dimen>
+    <dimen name="list_item_spacing">16dp</dimen>
+    <dimen name="list_item_spacing_half">8dp</dimen>
 </resources>

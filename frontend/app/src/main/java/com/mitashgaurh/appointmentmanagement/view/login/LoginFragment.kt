@@ -55,7 +55,7 @@ class LoginFragment : Fragment(), Injectable {
 
         requestFocusForView()
 
-        subscribeToViewEvents()
+        subscribeToLiveData()
     }
 
     private fun requestFocusForView() {
@@ -64,7 +64,7 @@ class LoginFragment : Fragment(), Injectable {
         activity?.let { AppUtils.showKeyboard(it) }
     }
 
-    private fun subscribeToViewEvents() {
+    private fun subscribeToLiveData() {
         mLoginViewModel.mLoginLiveData.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.LOADING) {
                 mBinding.showProgress = true
