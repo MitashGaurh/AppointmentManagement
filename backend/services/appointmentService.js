@@ -75,6 +75,7 @@ exports.getAppointmentHistory = (req, res) => {
         "inner join doctors using (doctor_id)\n" +
         "inner join appointment_type using (type_id) \n" +
         "inner join appointment_reason using (reason_id)\n" +
+        "inner join appointment_status using (status_id)\n" +
         "where student_id = ?";
     let params = [req.param("studentId")];
     mysql.query(query, params, (err, results) => {
@@ -87,7 +88,7 @@ exports.getAppointmentHistory = (req, res) => {
 };
 
 exports.cancelAppointment = (req, res) => {
-    let query = "delete from appointment_history where appointment_id = ?";
+    let query = "update appointment_history set status_id = 2 where appointment_id = ?";
     let params = [req.param("appointmentId")];
     mysql.query(query, params, (err, results) => {
         if (err) res.status(500).send({error: err});
