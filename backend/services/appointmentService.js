@@ -1,14 +1,12 @@
 let mysql = require('../utility/mysql');
 
 exports.getAppointmentTypes = (req, res) => {
-    let query = "select distinct type_name from appointment_type order by type_name asc";
+    let query = "select distinct type_id as typeId, type_name as typeName from appointment_type order by typeName asc";
     mysql.query(query, (err, results) => {
         if (err) res.status(500).send({error: err});
         else {
             if (results.length > 0) {
-                let typeList = [];
-                results.forEach(result => typeList.push(result.type_name));
-                res.status(200).send({appointmentTypes: typeList});
+                res.status(200).send({appointmentTypes: results});
             }
             else res.status(400).send({error: "No Appointment Types found!"});
         }
@@ -16,14 +14,12 @@ exports.getAppointmentTypes = (req, res) => {
 };
 
 exports.getAppointmentReasons = (req, res) => {
-    let query = "select distinct reason from appointment_reason order by reason asc";
+    let query = "select distinct reason_id as reasonId, reason from appointment_reason order by reason asc";
     mysql.query(query, (err, results) => {
         if (err) res.status(500).send({error: err});
         else {
             if (results.length > 0) {
-                let reasonList = [];
-                results.forEach(result => reasonList.push(result.reason));
-                res.status(200).send({appointmentReasons: reasonList});
+                res.status(200).send({appointmentReasons: results});
             }
             else res.status(400).send({error: "No Appointment Reasons found"});
         }
