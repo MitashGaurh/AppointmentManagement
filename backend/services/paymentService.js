@@ -10,7 +10,10 @@ exports.getPendingPayments = (req, res) => {
         "(select appointment_id from appointment_history where student_id = ?)";
     let params = [req.param("studentId")];
     mysql.query(query, params, (err, results) => {
-        if (err) res.status(500).send({error: err});
+        if (err) {
+            console.log(err);
+            res.status(500).send({error: err});
+        }
         else {
             if (results.length > 0) res.status(200).send({pendingPayments: results});
             else res.status(400).send({error: "No Payments Pending"});
@@ -29,7 +32,10 @@ exports.getPaymentHistory = (req, res) => {
         "where appointment_id in (select appointment_id from appointment_history where student_id = ?)";
     let params = [req.param("studentId")];
     mysql.query(query, params, (err, results) => {
-        if (err) res.status(500).send({error: err});
+        if (err) {
+            console.log(err);
+            res.status(500).send({error: err});
+        }
         else {
             if (results.length > 0) res.status(200).send({paymentHistory: results});
             else res.status(400).send({error: "No Payments found!"});
