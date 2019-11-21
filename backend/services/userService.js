@@ -4,7 +4,10 @@ exports.login = (req, res) => {
     let query = "select * from students where student_id = ?";
     let params = [req.param("studentId")];
     mysql.query(query, params, (err, results) => {
-        if (err) res.status(500).send({error: err});
+        if (err) {
+            console.log(err);
+            res.status(500).send({error: err});
+        }
         else {
             if (results.length > 0) {
                 if (results[0].password === req.param("password"))
@@ -22,7 +25,10 @@ exports.getUserDetails = (req, res) => {
         " mobile_number as mobileNumber, address, date_of_birth as dateOfBirth from students where student_id = ?";
     let params = [req.param("studentId")];
     mysql.query(query, params, (err, results) => {
-        if (err) res.status(500).send({error: err});
+        if (err) {
+            console.log(err);
+            res.status(500).send({error: err});
+        }
         else {
             if (results.length > 0) res.status(200).send({userDetails: results[0]});
             else res.status(400).send({error: "No user found with given details!"});
@@ -36,7 +42,10 @@ exports.updateStudentProfile = (req, res) => {
     let params = [req.param("firstName"), req.param("lastName"), req.param("emailId"),
         req.param("mobileNumber"), req.param("address"), req.param("dateOfBirth"), req.param("studentId")];
     mysql.query(query, params, (err, results) => {
-        if (err) res.status(500).send({error: err});
+        if (err) {
+            console.log(err);
+            res.status(500).send({error: err});
+        }
         else res.status(200).send({status: "success", message: "Update Successful"});
     });
 };
