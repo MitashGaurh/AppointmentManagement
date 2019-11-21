@@ -22,10 +22,10 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="center"
                 android:background="?attr/colorPrimary"
-                app:titleTextColor="@android:color/secondary_text_light"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:title="Book Appointment" />
+                app:title="Book Appointment"
+                app:titleTextColor="@android:color/secondary_text_light" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -34,12 +34,70 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen_8_dp"
-            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar" />
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            app:singleSelection="true" />
 
+        <TextView
+            android:id="@+id/tv_appointment_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12_dp"
+            android:layout_marginTop="@dimen/dimen_12_dp"
+            android:layout_marginEnd="@dimen/dimen_12_dp"
+            android:layout_marginBottom="@dimen/dimen_12_dp"
+            android:padding="@dimen/dimen_4_dp"
+            android:text="@string/txt_appointment_reason"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="@dimen/dimen_16_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toggle_button_group" />
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_appointment_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12_dp"
+            android:layout_marginTop="@dimen/dimen_4_dp"
+            android:layout_marginEnd="@dimen/dimen_12_dp"
+            android:layout_marginBottom="@dimen/dimen_12_dp"
+            android:background="@drawable/bg_spinner"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_appointment_reason" />
+
+        <TextView
+            android:id="@+id/tv_time_slots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12_dp"
+            android:layout_marginTop="@dimen/dimen_12_dp"
+            android:layout_marginEnd="@dimen/dimen_12_dp"
+            android:layout_marginBottom="@dimen/dimen_12_dp"
+            android:padding="@dimen/dimen_4_dp"
+            android:text="@string/txt_time_slot"
+            android:textColor="@android:color/secondary_text_light"
+            android:textSize="@dimen/dimen_16_sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_appointment_reason" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_time_slots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12_dp"
+            android:layout_marginTop="@dimen/dimen_4_dp"
+            android:layout_marginEnd="@dimen/dimen_12_dp"
+            android:layout_marginBottom="@dimen/dimen_8_dp"
+            android:background="@drawable/bg_spinner"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_slots" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

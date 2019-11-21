@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.mitashgaurh.appointmentmanagement.api.AppointmentManagementService
 import com.mitashgaurh.appointmentmanagement.db.AppointmentManagementDb
-import com.mitashgaurh.appointmentmanagement.db.dao.AppointmentHistoryDao
-import com.mitashgaurh.appointmentmanagement.db.dao.AppointmentTypeDao
-import com.mitashgaurh.appointmentmanagement.db.dao.TimeSlotDao
-import com.mitashgaurh.appointmentmanagement.db.dao.UserDao
+import com.mitashgaurh.appointmentmanagement.db.dao.*
 import com.mitashgaurh.appointmentmanagement.util.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -54,6 +51,12 @@ class AppModule {
     @Provides
     fun provideAppointmentTypeDao(db: AppointmentManagementDb): AppointmentTypeDao {
         return db.appointmentTypeDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppointmentReasonDao(db: AppointmentManagementDb): AppointmentReasonDao {
+        return db.appointmentReasonDao()
     }
 
     @Singleton

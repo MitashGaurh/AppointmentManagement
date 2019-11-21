@@ -7,24 +7,41 @@ import androidx.databinding.BindingAdapter
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mitashgaurh.appointmentmanagement.R
+import com.mitashgaurh.appointmentmanagement.vo.FragmentState
 
 object HomeBindings {
 
     @JvmStatic
     @BindingAdapter("app:fabAlignment")
-    fun fabAlignment(bottomAppBar: BottomAppBar, currentIsHome: Boolean) {
+    fun fabAlignment(bottomAppBar: BottomAppBar, fragmentState: FragmentState) {
         bottomAppBar.fabAlignmentMode =
-            if (currentIsHome) BottomAppBar.FAB_ALIGNMENT_MODE_CENTER else BottomAppBar.FAB_ALIGNMENT_MODE_END
+            if (fragmentState == FragmentState.HOME) BottomAppBar.FAB_ALIGNMENT_MODE_CENTER else BottomAppBar.FAB_ALIGNMENT_MODE_END
+
+        bottomAppBar.navigationIcon =
+            if (fragmentState == FragmentState.HOME) ContextCompat.getDrawable(
+                bottomAppBar.context,
+                R.drawable.ic_menu
+            ) else null
     }
 
     @JvmStatic
     @BindingAdapter("app:fabIcon")
-    fun fabAlignment(fab: FloatingActionButton, currentIsHome: Boolean) {
+    fun fabAlignment(fab: FloatingActionButton, fragmentState: FragmentState) {
         fab.setImageDrawable(
-            if (currentIsHome) ContextCompat.getDrawable(
-                fab.context,
-                R.drawable.ic_add_white
-            ) else ContextCompat.getDrawable(fab.context, R.drawable.ic_arrow_back)
+            when (fragmentState) {
+                FragmentState.HOME -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_add_white
+                )
+                FragmentState.BOOK_APPOINTMENT -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_done_white
+                )
+                FragmentState.EDIT_PROFILE -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_edit_white
+                )
+            }
         )
     }
 

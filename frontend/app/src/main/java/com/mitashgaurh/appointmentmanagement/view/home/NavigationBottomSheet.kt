@@ -14,7 +14,9 @@ import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.BottomSheetNavigationBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
 import com.mitashgaurh.appointmentmanagement.util.AppUtils
+import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import javax.inject.Inject
 
 
@@ -53,7 +55,7 @@ class NavigationBottomSheet : BottomSheetDialogFragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mHomeViewModel.setStudentId("012549888")
+        mHomeViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
 
         subscribeToLiveData()
     }
@@ -65,6 +67,4 @@ class NavigationBottomSheet : BottomSheetDialogFragment(), Injectable {
             }
         })
     }
-
-
 }

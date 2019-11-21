@@ -30,7 +30,7 @@ class LoginRepository @Inject constructor(
             override fun shouldFetch(data: User?): Boolean = data == null
 
             override fun loadFromDb(): LiveData<User> {
-                return mUserDao.loadUserByStudentId(studentId = studentId.toLong())
+                return mUserDao.loadUserByStudentId(studentId = studentId)
             }
 
             override fun createCall(): LiveData<ApiResponse<LoginResponse>> {

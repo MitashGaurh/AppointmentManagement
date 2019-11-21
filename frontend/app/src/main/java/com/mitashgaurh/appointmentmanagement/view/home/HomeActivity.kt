@@ -8,6 +8,7 @@ import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.ActivityHomeBinding
 import com.mitashgaurh.appointmentmanagement.util.ActivityUtils
 import com.mitashgaurh.appointmentmanagement.view.bookappointment.BookAppointmentFragment
+import com.mitashgaurh.appointmentmanagement.vo.FragmentState
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -46,11 +47,11 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
             )
         }
 
-        mBinding.currentIsHome = true
+        mBinding.fragmentState = FragmentState.HOME
 
         mBinding.fab.setOnClickListener {
-            if (mBinding.currentIsHome!!) {
-                toggleFabBehavior()
+            if (mBinding.fragmentState == FragmentState.HOME) {
+                toggleFabBehavior(FragmentState.BOOK_APPOINTMENT)
                 ActivityUtils.addFragmentToActivity(
                     supportFragmentManager,
                     BookAppointmentFragment(),
@@ -58,15 +59,22 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     true,
                     BookAppointmentFragment::class.java.simpleName
                 )
-            } else {
-                if (supportFragmentManager.backStackEntryCount == 1) toggleFabBehavior()
-                onBackPressed()
+            } else if (mBinding.fragmentState == FragmentState.BOOK_APPOINTMENT) {
+                val bookAppointmentFragment =
+                    supportFragmentManager.findFragmentById(R.id.home_container) as BookAppointmentFragment
+
+                bookAppointmentFragment.submitAppointment()
             }
         }
     }
 
-    private fun toggleFabBehavior() {
-        mBinding.currentIsHome = mBinding.currentIsHome?.not()!!
+    private fun toggleFabBehavior(state: FragmentState) {
+        mBinding.fragmentState = state
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) toggleFabBehavior(FragmentState.HOME)
+        super.onBackPressed()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector

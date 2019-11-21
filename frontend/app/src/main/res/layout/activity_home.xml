@@ -5,9 +5,11 @@
 
     <data>
 
+        <import type="com.mitashgaurh.appointmentmanagement.vo.FragmentState" />
+
         <variable
-            name="currentIsHome"
-            type="Boolean" />
+            name="fragmentState"
+            type="com.mitashgaurh.appointmentmanagement.vo.FragmentState" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -27,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:fabAlignment="@{currentIsHome}"
+            app:fabAlignment="@{fragmentState}"
             app:fabAnimationMode="slide"
             app:navigationIcon="@drawable/ic_menu">
 
@@ -40,7 +42,7 @@
                 android:background="@android:color/transparent"
                 android:padding="@dimen/dimen_8_dp"
                 app:srcCompat="@drawable/ic_more_vert"
-                app:visibleGone="@{currentIsHome}" />
+                app:visibleGone="@{fragmentState == FragmentState.HOME}" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -49,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/colorAccent"
-            app:fabIcon="@{currentIsHome}"
+            app:fabIcon="@{fragmentState}"
             app:layout_anchor="@id/bottom_app_bar"
             app:rippleColor="@color/colorWhite"
             app:srcCompat="@drawable/ic_add_white"

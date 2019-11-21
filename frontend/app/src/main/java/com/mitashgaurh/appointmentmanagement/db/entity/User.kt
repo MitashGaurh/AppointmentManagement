@@ -7,10 +7,9 @@ import java.util.*
 
 @Entity(tableName = "user")
 data class User(
-
     @PrimaryKey
     @field:SerializedName("student_id")
-    val studentId: Long,
+    val studentId: String,
     @field:SerializedName("first_name")
     val firstName: String,
     @field:SerializedName("last_name")

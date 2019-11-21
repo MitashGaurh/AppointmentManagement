@@ -3,20 +3,15 @@ package com.mitashgaurh.appointmentmanagement.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.mitashgaurh.appointmentmanagement.db.dao.AppointmentHistoryDao
-import com.mitashgaurh.appointmentmanagement.db.dao.AppointmentTypeDao
-import com.mitashgaurh.appointmentmanagement.db.dao.TimeSlotDao
-import com.mitashgaurh.appointmentmanagement.db.dao.UserDao
-import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
-import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentType
-import com.mitashgaurh.appointmentmanagement.db.entity.TimeSlot
-import com.mitashgaurh.appointmentmanagement.db.entity.User
+import com.mitashgaurh.appointmentmanagement.db.dao.*
+import com.mitashgaurh.appointmentmanagement.db.entity.*
 
 @Database(
     entities = [User::class,
         AppointmentHistory::class,
         TimeSlot::class,
-        AppointmentType::class],
+        AppointmentType::class,
+        AppointmentReason::class],
     version = 1,
     exportSchema = false
 )
@@ -30,4 +25,6 @@ abstract class AppointmentManagementDb : RoomDatabase() {
     abstract fun timeSlotDao(): TimeSlotDao
 
     abstract fun appointmentTypeDao(): AppointmentTypeDao
+
+    abstract fun appointmentReasonDao(): AppointmentReasonDao
 }

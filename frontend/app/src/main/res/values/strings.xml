@@ -13,6 +13,9 @@
     <string name="txt_my_appointments">My Appointments</string>
     <string name="txt_full_info">Full Info</string>
     <string name="txt_create_appointment">Click + to create a new appointment.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="txt_appointment_reason">Appointment Reason</string>
+    <string name="txt_submit">Submit</string>
+    <string name="txt_time_slot">Time Slot</string>
+    <string name="err_appointment_type">Select appointment type to proceed.</string>
+    <string name="err_appointment_creation">Failed to book appointment, please try again later.</string>
 </resources>

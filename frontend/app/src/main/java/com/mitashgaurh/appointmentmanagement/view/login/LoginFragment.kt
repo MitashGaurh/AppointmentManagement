@@ -14,8 +14,10 @@ import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentLoginBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
 import com.mitashgaurh.appointmentmanagement.util.AppUtils
+import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
 import com.mitashgaurh.appointmentmanagement.view.home.HomeActivity
+import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.Status
 import javax.inject.Inject
 
@@ -73,6 +75,7 @@ class LoginFragment : Fragment(), Injectable {
             } else if (it.status == Status.SUCCESS && null != it.data) {
                 mBinding.showProgress = false
                 mBinding.btnLogin.background.alpha = 255
+                PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID] = it.data.studentId
                 startActivity(Intent(activity, HomeActivity::class.java))
                 activity?.finish()
             } else if (it.status == Status.ERROR) {

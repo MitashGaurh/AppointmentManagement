@@ -45,6 +45,6 @@ class HomeRepository @Inject constructor(
     }
 
     fun loadUserByStudentId(studentId: String): LiveData<User> {
-        return mUserDao.loadUserByStudentId(studentId.toLong())
+        return mUserDao.loadUserByStudentId(studentId)
     }
 }

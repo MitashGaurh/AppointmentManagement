@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "appointment_type")
 data class AppointmentType(
     @PrimaryKey
-    val type: String
+    val typeId: Long,
+    val typeName: String
 )
