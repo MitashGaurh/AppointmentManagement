@@ -16,8 +16,10 @@ object ApplicationBindings {
 
     @JvmStatic
     @BindingAdapter("app:dateToText")
-    fun formatDate(view: TextView, date: Date) {
-        val formatter = SimpleDateFormat.getDateInstance()
-        view.text = formatter.format(date)
+    fun formatDate(view: TextView, date: Date?) {
+        if (null != date) {
+            val formatter = SimpleDateFormat.getDateInstance()
+            view.text = formatter.format(date)
+        }
     }
 }

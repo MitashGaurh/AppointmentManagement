@@ -30,9 +30,11 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="@dimen/dimen_16_dp"
+                android:layout_marginStart="@dimen/dimen_16_dp"
+                android:layout_marginTop="@dimen/dimen_8_dp"
                 android:src="@drawable/ic_person"
                 android:tint="@color/colorTabUnselected"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +51,7 @@
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="@dimen/dimen_16_sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_arrow"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Student name" />
@@ -65,95 +67,132 @@
                 android:text="@{user.emailId}"
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="@dimen/dimen_14_sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_arrow"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name"
                 tools:text="mitash.gaurh@sjsu.edu" />
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="@dimen/dimen_24_dp"
+                android:layout_height="@dimen/dimen_24_dp"
+                android:layout_marginTop="@dimen/dimen_8_dp"
+                android:layout_marginEnd="@dimen/dimen_16_dp"
+                android:src="@drawable/ic_keyboard_arrow_right_black"
+                android:tint="@color/colorTabUnselected"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/view_profile_divider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginBottom="@dimen/dimen_4_dp"
             android:background="@color/colorDivider"
             app:layout_constraintTop_toBottomOf="@id/layout_profile" />
 
-        <ImageView
-            android:id="@+id/iv_past_appointments"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/dimen_28_dp"
-            android:layout_marginTop="@dimen/dimen_16_dp"
-            android:layout_marginEnd="@dimen/dimen_28_dp"
-            android:tint="@color/colorTabUnselected"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_profile_divider"
-            app:srcCompat="@drawable/ic_date_range" />
-
-        <TextView
-            android:id="@+id/tv_past_appointments"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_appointment_history"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_14_dp"
-            android:paddingStart="@dimen/dimen_8_dp"
-            android:paddingTop="@dimen/dimen_2_dp"
-            android:paddingEnd="@dimen/dimen_8_dp"
-            android:paddingBottom="@dimen/dimen_4_dp"
-            android:text="Appointment History"
-            android:textColor="@android:color/secondary_text_light"
-            android:textSize="@dimen/dimen_16_sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_past_appointments"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingBottom="@dimen/dimen_16_dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_past_appointments"
-            app:layout_constraintTop_toTopOf="@id/iv_past_appointments" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_profile_divider">
+
+            <ImageView
+                android:id="@+id/iv_past_appointments"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/dimen_28_dp"
+                android:layout_marginTop="@dimen/dimen_16_dp"
+                android:layout_marginEnd="@dimen/dimen_28_dp"
+                android:tint="@color/colorTabUnselected"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_date_range" />
+
+            <TextView
+                android:id="@+id/tv_past_appointments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_14_dp"
+                android:paddingStart="@dimen/dimen_8_dp"
+                android:paddingTop="@dimen/dimen_2_dp"
+                android:paddingEnd="@dimen/dimen_8_dp"
+                android:paddingBottom="@dimen/dimen_4_dp"
+                android:text="@string/txt_appointment_history"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_16_sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_past_appointments"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_past_appointments"
+                app:layout_constraintTop_toTopOf="@id/iv_past_appointments" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
-            android:id="@+id/view_past_appointments_divider"
+            android:id="@+id/view_appointment_history_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/dimen_16_dp"
             android:layout_marginBottom="@dimen/dimen_4_dp"
             android:background="@color/colorDivider"
-            app:layout_constraintTop_toBottomOf="@id/tv_past_appointments" />
+            app:layout_constraintTop_toBottomOf="@id/layout_appointment_history" />
 
-        <ImageView
-            android:id="@+id/iv_available_doctors"
-            android:layout_width="@dimen/dimen_24_dp"
-            android:layout_height="@dimen/dimen_24_dp"
-            android:layout_marginStart="@dimen/dimen_28_dp"
-            android:layout_marginTop="@dimen/dimen_16_dp"
-            android:layout_marginEnd="@dimen/dimen_28_dp"
-            android:tint="@color/colorTabUnselected"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_past_appointments_divider"
-            app:srcCompat="@drawable/ic_local_hospital" />
-
-        <TextView
-            android:id="@+id/tv_available_doctors"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_available_doctors"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_14_dp"
-            android:paddingStart="@dimen/dimen_8_dp"
-            android:paddingTop="@dimen/dimen_2_dp"
-            android:paddingEnd="@dimen/dimen_8_dp"
-            android:paddingBottom="@dimen/dimen_4_dp"
-            android:text="Available Doctors"
-            android:textColor="@android:color/secondary_text_light"
-            android:textSize="@dimen/dimen_16_sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_available_doctors"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingBottom="@dimen/dimen_16_dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_available_doctors"
-            app:layout_constraintTop_toTopOf="@id/iv_available_doctors" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_appointment_history_divider">
+
+            <ImageView
+                android:id="@+id/iv_available_doctors"
+                android:layout_width="@dimen/dimen_24_dp"
+                android:layout_height="@dimen/dimen_24_dp"
+                android:layout_marginStart="@dimen/dimen_28_dp"
+                android:layout_marginTop="@dimen/dimen_16_dp"
+                android:layout_marginEnd="@dimen/dimen_28_dp"
+                android:tint="@color/colorTabUnselected"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_local_hospital" />
+
+            <TextView
+                android:id="@+id/tv_available_doctors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_14_dp"
+                android:paddingStart="@dimen/dimen_8_dp"
+                android:paddingTop="@dimen/dimen_2_dp"
+                android:paddingEnd="@dimen/dimen_8_dp"
+                android:paddingBottom="@dimen/dimen_4_dp"
+                android:text="Available Doctors"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_16_sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_available_doctors"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_available_doctors"
+                app:layout_constraintTop_toTopOf="@id/iv_available_doctors" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/view_available_doctors_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/dimen_16_dp"
             android:layout_marginBottom="@dimen/dimen_4_dp"
             android:background="@color/colorDivider"
-            app:layout_constraintTop_toBottomOf="@id/tv_available_doctors" />
+            app:layout_constraintTop_toBottomOf="@id/layout_available_doctors" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

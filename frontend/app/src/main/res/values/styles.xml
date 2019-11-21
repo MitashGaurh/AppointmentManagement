@@ -17,7 +17,7 @@
     </style>
 
     <style name="AppTheme.TextAppearance.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/bg_text_input_layout</item>=
+        <item name="boxStrokeColor">@color/bg_text_input_layout</item>
     </style>
 
 </resources>

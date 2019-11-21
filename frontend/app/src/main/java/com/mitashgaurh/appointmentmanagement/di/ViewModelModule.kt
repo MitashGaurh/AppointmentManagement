@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mitashgaurh.appointmentmanagement.view.bookappointment.BookAppointmentViewModel
 import com.mitashgaurh.appointmentmanagement.view.home.HomeViewModel
 import com.mitashgaurh.appointmentmanagement.view.login.LoginViewModel
+import com.mitashgaurh.appointmentmanagement.view.profile.ProfileViewModel
 import com.mitashgaurh.appointmentmanagement.viewmodel.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -28,6 +29,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BookAppointmentViewModel::class)
     abstract fun bindBookAppointmentViewModel(bookAppointmentViewModel: BookAppointmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(profileViewModel: ProfileViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

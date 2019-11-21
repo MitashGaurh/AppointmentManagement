@@ -13,10 +13,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.BottomSheetNavigationBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
+import com.mitashgaurh.appointmentmanagement.util.ActivityUtils
 import com.mitashgaurh.appointmentmanagement.util.AppUtils
 import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.view.profile.ProfileFragment
 import com.mitashgaurh.appointmentmanagement.vo.AppConstants
+import com.mitashgaurh.appointmentmanagement.vo.FragmentState
 import javax.inject.Inject
 
 
@@ -57,7 +60,23 @@ class NavigationBottomSheet : BottomSheetDialogFragment(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mHomeViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
 
+        initializeViews()
+
         subscribeToLiveData()
+    }
+
+    private fun initializeViews() {
+        mBinding.layoutProfile.setOnClickListener {
+            (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.VIEW_PROFILE)
+            ActivityUtils.addFragmentToActivity(
+                requireActivity().supportFragmentManager,
+                ProfileFragment(),
+                R.id.home_container,
+                true,
+                ProfileFragment::class.java.simpleName
+            )
+            dismiss()
+        }
     }
 
     private fun subscribeToLiveData() {

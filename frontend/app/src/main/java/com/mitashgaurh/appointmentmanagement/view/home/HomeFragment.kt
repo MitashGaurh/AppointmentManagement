@@ -15,7 +15,10 @@ import com.mitashgaurh.appointmentmanagement.AppExecutors
 import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentHomeBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
+import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.view.common.BackHandledFragment
+import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.Status
 import javax.inject.Inject
 
@@ -23,7 +26,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment(), Injectable {
+class HomeFragment : BackHandledFragment(), Injectable {
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
@@ -56,8 +59,10 @@ class HomeFragment : Fragment(), Injectable {
         return dataBinding.root
     }
 
+    override fun onBackPressed() = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mHomeViewModel.setStudentId("012549888")
+        mHomeViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
 
         initRecyclerView()
 

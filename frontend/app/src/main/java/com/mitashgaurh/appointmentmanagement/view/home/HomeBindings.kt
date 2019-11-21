@@ -37,9 +37,13 @@ object HomeBindings {
                     fab.context,
                     R.drawable.ic_done_white
                 )
-                FragmentState.EDIT_PROFILE -> ContextCompat.getDrawable(
+                FragmentState.VIEW_PROFILE -> ContextCompat.getDrawable(
                     fab.context,
                     R.drawable.ic_edit_white
+                )
+                FragmentState.EDIT_PROFILE -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_done_white
                 )
             }
         )

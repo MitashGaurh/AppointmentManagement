@@ -21,17 +21,16 @@ import com.mitashgaurh.appointmentmanagement.db.entity.TimeSlot
 import com.mitashgaurh.appointmentmanagement.di.Injectable
 import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
-import com.mitashgaurh.appointmentmanagement.vo.AppConstants
-import com.mitashgaurh.appointmentmanagement.vo.CreateAppointmentRequest
-import com.mitashgaurh.appointmentmanagement.vo.EventObserver
-import com.mitashgaurh.appointmentmanagement.vo.Status
+import com.mitashgaurh.appointmentmanagement.view.common.BackHandledFragment
+import com.mitashgaurh.appointmentmanagement.view.home.HomeActivity
+import com.mitashgaurh.appointmentmanagement.vo.*
 import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class BookAppointmentFragment : Fragment(), Injectable {
+class BookAppointmentFragment : BackHandledFragment(), Injectable {
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
@@ -167,6 +166,11 @@ class BookAppointmentFragment : Fragment(), Injectable {
 
         mBookAppointmentViewModel.mCreateAppointmentLiveData.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS && null != it.data) {
+                Toast.makeText(
+                    context,
+                    getString(R.string.txt_appointment_creation),
+                    Toast.LENGTH_SHORT
+                ).show()
                 requireActivity().onBackPressed()
             } else if (it.status == Status.ERROR) {
                 Toast.makeText(
@@ -187,6 +191,11 @@ class BookAppointmentFragment : Fragment(), Injectable {
         }
     }
 
+    override fun onBackPressed(): Boolean {
+        (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.HOME)
+        return false
+    }
+
     private fun selectToggleButton(materialButton: MaterialButton) {
         materialButton.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
         materialButton.setTextColor(ContextCompat.getColor(context!!, R.color.colorWhite))
@@ -196,5 +205,4 @@ class BookAppointmentFragment : Fragment(), Injectable {
         materialButton.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorWhite))
         materialButton.setTextColor(ContextCompat.getColor(context!!, R.color.colorAccent))
     }
-
 }
