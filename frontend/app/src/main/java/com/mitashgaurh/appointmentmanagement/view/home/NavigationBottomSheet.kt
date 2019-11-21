@@ -17,6 +17,7 @@ import com.mitashgaurh.appointmentmanagement.util.ActivityUtils
 import com.mitashgaurh.appointmentmanagement.util.AppUtils
 import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.view.appointmentHistory.AppointmentHistoryFragment
 import com.mitashgaurh.appointmentmanagement.view.profile.ProfileFragment
 import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.FragmentState
@@ -74,6 +75,18 @@ class NavigationBottomSheet : BottomSheetDialogFragment(), Injectable {
                 R.id.home_container,
                 true,
                 ProfileFragment::class.java.simpleName
+            )
+            dismiss()
+        }
+
+        mBinding.layoutAppointmentHistory.setOnClickListener {
+            (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.APPOINTMENT_HISTORY)
+            ActivityUtils.addFragmentToActivity(
+                requireActivity().supportFragmentManager,
+                AppointmentHistoryFragment(),
+                R.id.home_container,
+                true,
+                AppointmentHistoryFragment::class.java.simpleName
             )
             dismiss()
         }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
+import com.mitashgaurh.appointmentmanagement.db.entity.PaymentHistory
 import com.mitashgaurh.appointmentmanagement.db.entity.User
 import com.mitashgaurh.appointmentmanagement.repository.HomeRepository
 import com.mitashgaurh.appointmentmanagement.util.AbsentLiveData
@@ -15,14 +16,14 @@ import javax.inject.Inject
 class HomeViewModel
 @Inject constructor(private val mHomeRepository: HomeRepository) : ViewModel() {
 
-    private var studentIdEvent = MutableLiveData<Event<String>>()
+    private var studentIdEvent = MutableLiveData<String>()
 
-    val mLoginLiveData: LiveData<Resource<List<AppointmentHistory>>> =
+    val mAppointmentHistoryLiveData: LiveData<Resource<List<AppointmentHistory>>> =
         Transformations.switchMap(studentIdEvent) {
             if (null == it) {
                 AbsentLiveData.create()
             } else {
-                mHomeRepository.callAppointmentHistoryService(it.getContentIfNotHandled()!!)
+                mHomeRepository.callAppointmentHistoryService(it)
             }
         }
 
@@ -31,11 +32,20 @@ class HomeViewModel
             if (null == it) {
                 AbsentLiveData.create()
             } else {
-                mHomeRepository.loadUserByStudentId(it.getContentIfNotHandled()!!)
+                mHomeRepository.loadUserByStudentId(it)
+            }
+        }
+
+    val mPaymentHistoryLiveData: LiveData<Resource<List<PaymentHistory>>> =
+        Transformations.switchMap(studentIdEvent) {
+            if (null == it) {
+                AbsentLiveData.create()
+            } else {
+                mHomeRepository.callPaymentHistoryService(it)
             }
         }
 
     fun setStudentId(studentId: String) {
-        studentIdEvent.value = Event(studentId)
+        studentIdEvent.value = studentId
     }
 }

@@ -10,7 +10,7 @@ import com.mitashgaurh.appointmentmanagement.databinding.ItemAppointmentHistoryB
 import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
 import com.mitashgaurh.appointmentmanagement.view.common.DataBoundListAdapter
 
-class HomeAdapter(appExecutors: AppExecutors) :
+class AppointmentHistoryAdapter(appExecutors: AppExecutors) :
     DataBoundListAdapter<AppointmentHistory, ItemAppointmentHistoryBinding>(
         mAppExecutors = appExecutors,
         mDiffCallback = object : DiffUtil.ItemCallback<AppointmentHistory>() {

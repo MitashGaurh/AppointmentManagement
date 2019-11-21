@@ -45,6 +45,10 @@ object HomeBindings {
                     fab.context,
                     R.drawable.ic_done_white
                 )
+                FragmentState.APPOINTMENT_HISTORY -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_arrow_back
+                )
             }
         )
     }
@@ -53,9 +57,9 @@ object HomeBindings {
     @BindingAdapter("app:appointmentStatus")
     fun setAppointmentStatus(textView: TextView, status: String) {
         when (status) {
-            "APPROVED" -> textView.setTextColor(Color.GREEN)
-            "CANCELLED" -> textView.setTextColor(Color.RED)
-            "PENDING" -> textView.setTextColor(Color.YELLOW)
+            "APPROVED" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_green_dark))
+            "CANCELLED" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_red_dark))
+            "PENDING" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_orange_dark))
             else -> textView.setTextColor(Color.DKGRAY)
         }
     }

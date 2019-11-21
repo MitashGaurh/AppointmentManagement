@@ -26,4 +26,11 @@
     <string name="txt_contact_number">Contact Number</string>
     <string name="txt_address">Address</string>
     <string name="txt_date_of_birth">Date of Birth</string>
+    <string name="txt_scheduled_appointments">Scheduled Appointments</string>
+    <string name="txt_see_more">See More</string>
+    <string name="txt_pending_payments">Pending payments</string>
+    <string name="txt_total_amount">Total Amount</string>
+    <string name="txt_payment_history">Payment History</string>
+    <string name="txt_privacy_policy">Privacy Policy</string>
+    <string name="txt_dot">·</string>
 </resources>

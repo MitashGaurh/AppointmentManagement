@@ -18,6 +18,10 @@ interface AppointmentManagementService {
     @POST("/getAppointmentHistory")
     fun fetchAppointmentHistory(@Field(value = "studentId") studentId: String): LiveData<ApiResponse<AppointmentHistoryResponse>>
 
+    @FormUrlEncoded
+    @POST("/getPaymentHistory")
+    fun fetchPaymentHistory(@Field(value = "studentId") studentId: String): LiveData<ApiResponse<PaymentHistoryResponse>>
+
     @GET("/getAvailableTimeSlots")
     fun fetchAvailableTimeSlots(): LiveData<ApiResponse<TimeSlotsResponse>>
 

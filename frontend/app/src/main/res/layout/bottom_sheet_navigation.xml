@@ -144,7 +144,7 @@
             app:layout_constraintTop_toBottomOf="@id/layout_appointment_history" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_available_doctors"
+            android:id="@+id/layout_payment_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -154,6 +154,57 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_appointment_history_divider">
+
+            <ImageView
+                android:id="@+id/iv_payment_history"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="@dimen/dimen_28_dp"
+                android:layout_marginTop="@dimen/dimen_16_dp"
+                android:layout_marginEnd="@dimen/dimen_28_dp"
+                android:tint="@color/colorTabUnselected"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_payment_black" />
+
+            <TextView
+                android:id="@+id/tv_payment_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_14_dp"
+                android:paddingStart="@dimen/dimen_8_dp"
+                android:paddingTop="@dimen/dimen_2_dp"
+                android:paddingEnd="@dimen/dimen_8_dp"
+                android:paddingBottom="@dimen/dimen_4_dp"
+                android:text="@string/txt_payment_history"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_16_sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_payment_history"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_payment_history"
+                app:layout_constraintTop_toTopOf="@id/iv_payment_history" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/view_payment_history_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/dimen_4_dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintTop_toBottomOf="@id/layout_payment_history" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_available_doctors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingBottom="@dimen/dimen_16_dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_payment_history_divider">
 
             <ImageView
                 android:id="@+id/iv_available_doctors"
@@ -193,6 +244,42 @@
             android:layout_marginBottom="@dimen/dimen_4_dp"
             android:background="@color/colorDivider"
             app:layout_constraintTop_toBottomOf="@id/layout_available_doctors" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_4_dp"
+            app:layout_constraintTop_toBottomOf="@id/view_available_doctors_divider">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/txt_privacy_policy"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_12_sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dimen_8_dp"
+                android:layout_marginEnd="@dimen/dimen_8_dp"
+                android:text="@string/txt_dot"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_18_sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Terms of service"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/dimen_12_sp" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

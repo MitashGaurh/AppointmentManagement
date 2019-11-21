@@ -86,6 +86,10 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector,
 
                     profileFragment.updateUserProfile()
                 }
+
+                FragmentState.APPOINTMENT_HISTORY -> {
+                    onBackPressed()
+                }
             }
         }
     }

@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="appointmentHistory"
-            type="com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory" />
+            name="paymentHistory"
+            type="com.mitashgaurh.appointmentmanagement.db.entity.PaymentHistory" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_4_dp"
         android:layout_marginEnd="@dimen/dimen_4_dp"
-        app:cardBackgroundColor="@color/colorCardBackground2"
+        app:cardBackgroundColor="@color/colorCardBackground1"
         app:cardCornerRadius="@dimen/dimen_12_dp"
         app:cardElevation="@dimen/dimen_4_dp"
         app:cardUseCompatPadding="true">
@@ -32,8 +32,8 @@
                 android:paddingStart="@dimen/dimen_12_dp"
                 android:paddingTop="@dimen/dimen_8_dp"
                 android:paddingEnd="@dimen/dimen_12_dp"
-                android:text="@{appointmentHistory.doctorName}"
-                android:textColor="@android:color/secondary_text_light"
+                android:text="@{paymentHistory.doctorName}"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimen_18_sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
@@ -43,78 +43,98 @@
 
             <TextView
                 android:id="@+id/tv_appointment_status"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:padding="@dimen/dimen_8_dp"
-                android:text="@{appointmentHistory.appointmentStatus}"
-                android:textColor="@android:color/holo_green_dark"
+                android:background="@drawable/bg_rounded_orange"
+                android:gravity="center_horizontal"
+                android:paddingStart="@dimen/dimen_12_dp"
+                android:paddingTop="@dimen/dimen_6_dp"
+                android:paddingEnd="@dimen/dimen_12_dp"
+                android:paddingBottom="@dimen/dimen_6_dp"
+                android:text="@{paymentHistory.paymentStatus}"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimen_14_sp"
-                app:appointmentStatus="@{appointmentHistory.appointmentStatus}"
+                android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@id/tv_doctor_name"
                 app:layout_constraintBottom_toTopOf="@id/tv_appointment_time"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/guideline"
-                tools:text="Approved" />
-
-            <TextView
-                android:id="@+id/tv_appointment_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8_dp"
-                android:layout_marginTop="@dimen/dimen_4_dp"
-                android:layout_marginEnd="@dimen/dimen_8_dp"
-                android:drawableStart="@drawable/ic_access_time"
-                android:drawablePadding="@dimen/dimen_4_dp"
-                android:drawableTint="@color/colorTabUnselected"
-                android:gravity="center_vertical"
-                android:paddingTop="@dimen/dimen_4_dp"
-                android:paddingBottom="@dimen/dimen_2_dp"
-                android:text="@{appointmentHistory.appointmentTime}"
-                android:textSize="@dimen/dimen_14_sp"
-                app:layout_constraintBottom_toTopOf="@id/tv_appointment_date"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_doctor_name"
-                tools:text="Appointment time" />
+                tools:text="Pending" />
 
             <TextView
                 android:id="@+id/tv_appointment_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8_dp"
-                android:layout_marginEnd="@dimen/dimen_8_dp"
-                android:drawableStart="@drawable/ic_date_range"
-                android:drawablePadding="@dimen/dimen_4_dp"
-                android:drawableTint="@color/colorTabUnselected"
+                android:layout_marginStart="@dimen/dimen_12_dp"
+                android:layout_marginTop="@dimen/dimen_4_dp"
+                android:layout_marginEnd="@dimen/dimen_12_dp"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dimen_4_dp"
+                android:paddingBottom="@dimen/dimen_2_dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimen_14_sp"
+                app:dateToText="@{paymentHistory.appointmentDate}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_doctor_name"
+                tools:text="Appointment time" />
+
+            <TextView
+                android:id="@+id/tv_appointment_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_12_dp"
+                android:layout_marginEnd="@dimen/dimen_12_dp"
                 android:gravity="center_vertical"
                 android:paddingTop="@dimen/dimen_2_dp"
                 android:paddingBottom="@dimen/dimen_4_dp"
+                android:text="@{paymentHistory.appointmentTime}"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dimen_14_sp"
-                app:dateToText="@{appointmentHistory.appointmentDate}"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_appointment_date"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_appointment_time"
+                app:layout_constraintStart_toEndOf="@id/tv_appointment_date"
                 tools:text="Appointment date" />
 
             <TextView
-                android:id="@+id/tv_appointment_reason"
+                android:id="@+id/tv_due_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8_dp"
-                android:layout_marginTop="@dimen/dimen_4_dp"
-                android:layout_marginEnd="@dimen/dimen_8_dp"
+                android:layout_marginStart="@dimen/dimen_4_dp"
+                android:layout_marginTop="@dimen/dimen_8_dp"
+                android:layout_marginEnd="@dimen/dimen_4_dp"
                 android:gravity="center_vertical"
-                android:padding="@dimen/dimen_4_dp"
-                android:text="@{appointmentHistory.appointmentReason}"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="@dimen/dimen_14_sp"
+                android:paddingStart="@dimen/dimen_8_dp"
+                android:paddingTop="@dimen/dimen_8_dp"
+                android:paddingEnd="@dimen/dimen_8_dp"
+                android:paddingBottom="@dimen/dimen_2_dp"
+                android:text="@{paymentHistory.amountDue + ``}"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimen_16_sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_appointment_date"
-                tools:text="Appointment Reason" />
+                tools:text="Amount Due" />
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4_dp"
+                android:layout_marginEnd="@dimen/dimen_4_dp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/dimen_8_dp"
+                android:paddingTop="@dimen/dimen_2_dp"
+                android:paddingEnd="@dimen/dimen_8_dp"
+                android:paddingBottom="@dimen/dimen_8_dp"
+                android:text="@string/txt_total_amount"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dimen_14_sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_due_amount" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -122,26 +142,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.72" />
-
-            <TextView
-                android:id="@+id/tv_appointment_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_rounded_dark"
-                android:gravity="center_horizontal"
-                android:padding="@dimen/dimen_8_dp"
-                android:paddingStart="@dimen/dimen_12_dp"
-                android:paddingTop="@dimen/dimen_6_dp"
-                android:paddingEnd="@dimen/dimen_12_dp"
-                android:paddingBottom="@dimen/dimen_6_dp"
-                android:text="@{appointmentHistory.appointmentType}"
-                android:textAllCaps="true"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/dimen_14_sp"
-                android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@id/tv_appointment_reason"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Type" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,7 +40,9 @@ class HomeFragment : BackHandledFragment(), Injectable {
 
     private var mBinding by autoCleared<FragmentHomeBinding>()
 
-    private var mAdapter by autoCleared<HomeAdapter>()
+    private var mScheduledAppointmentAdapter by autoCleared<AppointmentHistoryAdapter>()
+
+    private var mPendingPaymentAdapter by autoCleared<PaymentHistoryAdapter>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,27 +66,53 @@ class HomeFragment : BackHandledFragment(), Injectable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mHomeViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
 
-        initRecyclerView()
+        initScheduledAppointmentRecyclerView()
+
+        initPendingPaymentsRecyclerView()
 
         subscribeToLiveData()
     }
 
-    private fun initRecyclerView() {
-        val adapter = HomeAdapter(mAppExecutors)
+    private fun initScheduledAppointmentRecyclerView() {
+        val adapter = AppointmentHistoryAdapter(mAppExecutors)
 
-        mAdapter = adapter
-        mBinding.rvAppointments.adapter = adapter
-        mBinding.rvAppointments.layoutManager = LinearLayoutManager(context)
+        mScheduledAppointmentAdapter = adapter
+
+        mBinding.rvScheduledAppointments.adapter = adapter
+        mBinding.rvScheduledAppointments.layoutManager = LinearLayoutManager(context)
+
+        mBinding.rvScheduledAppointments.isNestedScrollingEnabled = false
+    }
+
+    private fun initPendingPaymentsRecyclerView() {
+        val adapter = PaymentHistoryAdapter(mAppExecutors)
+
+        mPendingPaymentAdapter = adapter
+
+        mBinding.rvPendingPayment.adapter = adapter
+        mBinding.rvPendingPayment.layoutManager = LinearLayoutManager(context)
+
+        mBinding.rvPendingPayment.isNestedScrollingEnabled = false
     }
 
     private fun subscribeToLiveData() {
-        mHomeViewModel.mLoginLiveData.observe(viewLifecycleOwner, Observer {
+        mHomeViewModel.mAppointmentHistoryLiveData.observe(viewLifecycleOwner, Observer {
             if (it.status == Status.SUCCESS && null != it.data && it.data.isNotEmpty()) {
-                mBinding.emptyList = false
-                mAdapter.submitList(it.data)
+                mBinding.emptyScheduledList = false
+                mScheduledAppointmentAdapter.submitList(it.data)
             } else {
-                mBinding.emptyList = true
-                mAdapter.submitList(emptyList())
+                mBinding.emptyScheduledList = true
+                mScheduledAppointmentAdapter.submitList(emptyList())
+            }
+        })
+
+        mHomeViewModel.mPaymentHistoryLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS && null != it.data && it.data.isNotEmpty()) {
+                mBinding.emptyPendingPaymentList = false
+                mPendingPaymentAdapter.submitList(it.data)
+            } else {
+                mBinding.emptyPendingPaymentList = true
+                mPendingPaymentAdapter.submitList(emptyList())
             }
         })
     }

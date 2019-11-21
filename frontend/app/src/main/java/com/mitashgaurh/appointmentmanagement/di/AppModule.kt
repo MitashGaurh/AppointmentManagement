@@ -64,4 +64,10 @@ class AppModule {
     fun provideTimeSlotDao(db: AppointmentManagementDb): TimeSlotDao {
         return db.timeSlotDao()
     }
+
+    @Singleton
+    @Provides
+    fun providePaymentHistoryDao(db: AppointmentManagementDb): PaymentHistoryDao {
+        return db.paymentHistoryDao()
+    }
 }

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="emptyList"
+            name="emptyScheduledList"
+            type="Boolean" />
+
+        <variable
+            name="emptyPendingPaymentList"
             type="Boolean" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,20 +40,101 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:title="@string/txt_my_appointments"
+                    app:title="Home"
                     app:titleTextColor="@android:color/secondary_text_light" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_appointments"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:visibleGone="@{!emptyList}"
-            tools:listitem="@layout/item_appointment_history" />
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/dimen_24_dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_pending_payments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12_dp"
+                    android:layout_marginTop="@dimen/dimen_12_dp"
+                    android:layout_marginEnd="@dimen/dimen_12_dp"
+                    android:layout_marginBottom="@dimen/dimen_12_dp"
+                    android:padding="@dimen/dimen_4_dp"
+                    android:text="@string/txt_pending_payments"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="@dimen/dimen_16_sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibleGone="@{!emptyPendingPaymentList}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_pending_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/dimen_4_dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pending_payments"
+                    app:visibleGone="@{!emptyPendingPaymentList}"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_payment_history" />
+
+                <TextView
+                    android:id="@+id/tv_scheduled_appointments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_12_dp"
+                    android:layout_marginTop="@dimen/dimen_12_dp"
+                    android:layout_marginEnd="@dimen/dimen_12_dp"
+                    android:layout_marginBottom="@dimen/dimen_12_dp"
+                    android:padding="@dimen/dimen_4_dp"
+                    android:text="@string/txt_scheduled_appointments"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="@dimen/dimen_16_sp"
+                    app:layout_constraintEnd_toStartOf="@id/btn_see_more_appointments"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_pending_payment"
+                    app:visibleGone="@{!emptyScheduledList}" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_see_more_appointments"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_8_dp"
+                    android:layout_marginEnd="@dimen/dimen_8_dp"
+                    android:text="@string/txt_see_more"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/dimen_14_sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tv_scheduled_appointments"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibleGone="@{!emptyScheduledList}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_scheduled_appointments"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_see_more_appointments"
+                    app:visibleGone="@{!emptyScheduledList}"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_appointment_history" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,7 +142,7 @@
             android:layout_gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
-            app:visibleGone="@{emptyList}">
+            app:visibleGone="@{emptyScheduledList &amp;&amp; emptyPendingPaymentList}">
 
             <ImageView
                 android:layout_width="match_parent"
