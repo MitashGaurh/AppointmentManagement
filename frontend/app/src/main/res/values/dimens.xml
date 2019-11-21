@@ -18,4 +18,5 @@
     <dimen name="dimen_1_dp">1dp</dimen>
     <dimen name="dimen_24_dp">24dp</dimen>
     <dimen name="dimen_12_sp">12sp</dimen>
+    <dimen name="dimen_3_dp">3dp</dimen>
 </resources>
