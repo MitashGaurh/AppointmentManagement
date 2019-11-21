@@ -55,7 +55,7 @@ exports.getAvailableTimeSlots = (req, res) => {
 
 exports.createNewAppointment = (req, res) => {
     let query = "insert into appointment_history (student_id, slot_id, type_id, reason_id, appointment_date) " +
-        "values (?,?,?,?,?)";
+        "values (?,?,?,?,str_to_date(?, '%M %d, %Y'))";
     let params = [req.param("studentId"), req.param("slotId"), req.param("typeId"), req.param("reasonId"), req.param("appointmentDate")];
     mysql.query(query, params, (err, results) => {
         if (err) res.status(500).send({error: err});
