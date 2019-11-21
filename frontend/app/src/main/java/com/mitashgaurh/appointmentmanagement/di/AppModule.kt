@@ -1,6 +1,7 @@
 package com.mitashgaurh.appointmentmanagement.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.mitashgaurh.appointmentmanagement.api.AppointmentManagementService
 import com.mitashgaurh.appointmentmanagement.db.AppointmentManagementDb
@@ -24,6 +25,12 @@ class AppModule {
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
             .create(AppointmentManagementService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideApplicationContext(app: Application): Context {
+        return app.applicationContext
     }
 
     @Singleton
@@ -69,5 +76,11 @@ class AppModule {
     @Provides
     fun providePaymentHistoryDao(db: AppointmentManagementDb): PaymentHistoryDao {
         return db.paymentHistoryDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDoctorDao(db: AppointmentManagementDb): DoctorDao {
+        return db.doctorDao()
     }
 }

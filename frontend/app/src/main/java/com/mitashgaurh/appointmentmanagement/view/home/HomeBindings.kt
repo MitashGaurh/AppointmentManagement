@@ -49,6 +49,14 @@ object HomeBindings {
                     fab.context,
                     R.drawable.ic_arrow_back
                 )
+                FragmentState.PAYMENT_HISTORY -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_arrow_back
+                )
+                FragmentState.AVAILABLE_DOCTORS -> ContextCompat.getDrawable(
+                    fab.context,
+                    R.drawable.ic_arrow_back
+                )
             }
         )
     }
@@ -57,9 +65,24 @@ object HomeBindings {
     @BindingAdapter("app:appointmentStatus")
     fun setAppointmentStatus(textView: TextView, status: String) {
         when (status) {
-            "APPROVED" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_green_dark))
-            "CANCELLED" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_red_dark))
-            "PENDING" -> textView.setTextColor(ContextCompat.getColor(textView.context, android.R.color.holo_orange_dark))
+            "APPROVED" -> textView.setTextColor(
+                ContextCompat.getColor(
+                    textView.context,
+                    android.R.color.holo_green_dark
+                )
+            )
+            "CANCELLED" -> textView.setTextColor(
+                ContextCompat.getColor(
+                    textView.context,
+                    android.R.color.holo_red_dark
+                )
+            )
+            "PENDING" -> textView.setTextColor(
+                ContextCompat.getColor(
+                    textView.context,
+                    android.R.color.holo_orange_dark
+                )
+            )
             else -> textView.setTextColor(Color.DKGRAY)
         }
     }

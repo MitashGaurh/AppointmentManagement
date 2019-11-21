@@ -18,6 +18,8 @@ import com.mitashgaurh.appointmentmanagement.util.AppUtils
 import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
 import com.mitashgaurh.appointmentmanagement.view.appointmentHistory.AppointmentHistoryFragment
+import com.mitashgaurh.appointmentmanagement.view.doctor.DoctorListFragment
+import com.mitashgaurh.appointmentmanagement.view.payment.PaymentHistoryFragment
 import com.mitashgaurh.appointmentmanagement.view.profile.ProfileFragment
 import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.FragmentState
@@ -87,6 +89,30 @@ class NavigationBottomSheet : BottomSheetDialogFragment(), Injectable {
                 R.id.home_container,
                 true,
                 AppointmentHistoryFragment::class.java.simpleName
+            )
+            dismiss()
+        }
+
+        mBinding.layoutPaymentHistory.setOnClickListener {
+            (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.PAYMENT_HISTORY)
+            ActivityUtils.addFragmentToActivity(
+                requireActivity().supportFragmentManager,
+                PaymentHistoryFragment(),
+                R.id.home_container,
+                true,
+                PaymentHistoryFragment::class.java.simpleName
+            )
+            dismiss()
+        }
+
+        mBinding.layoutAvailableDoctors.setOnClickListener {
+            (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.AVAILABLE_DOCTORS)
+            ActivityUtils.addFragmentToActivity(
+                requireActivity().supportFragmentManager,
+                DoctorListFragment(),
+                R.id.home_container,
+                true,
+                DoctorListFragment::class.java.simpleName
             )
             dismiss()
         }

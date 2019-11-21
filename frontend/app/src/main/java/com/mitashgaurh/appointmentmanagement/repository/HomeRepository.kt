@@ -1,5 +1,6 @@
 package com.mitashgaurh.appointmentmanagement.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.mitashgaurh.appointmentmanagement.AppExecutors
 import com.mitashgaurh.appointmentmanagement.api.ApiResponse
@@ -11,6 +12,8 @@ import com.mitashgaurh.appointmentmanagement.db.dao.UserDao
 import com.mitashgaurh.appointmentmanagement.db.entity.AppointmentHistory
 import com.mitashgaurh.appointmentmanagement.db.entity.PaymentHistory
 import com.mitashgaurh.appointmentmanagement.db.entity.User
+import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
+import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.AppointmentHistoryResponse
 import com.mitashgaurh.appointmentmanagement.vo.PaymentHistoryResponse
 import com.mitashgaurh.appointmentmanagement.vo.Resource
@@ -20,6 +23,7 @@ import javax.inject.Singleton
 
 @Singleton
 class HomeRepository @Inject constructor(
+    private val mContext: Context,
     private val mAppExecutors: AppExecutors,
     private val mService: AppointmentManagementService,
     private val mAppointmentHistoryDao: AppointmentHistoryDao,
@@ -34,10 +38,12 @@ class HomeRepository @Inject constructor(
                 item.appointmentHistory.forEach {
                     mAppointmentHistoryDao.insert(it)
                 }
+                PreferenceUtil[mContext, AppConstants.SharedPreferenceConstants.KEY_CREATED_APPOINTMENT] =
+                    false
             }
 
             override fun shouldFetch(data: List<AppointmentHistory>?): Boolean =
-                data == null || data.isEmpty()
+                data == null || data.isEmpty() || PreferenceUtil[mContext, AppConstants.SharedPreferenceConstants.KEY_CREATED_APPOINTMENT, false]
 
             override fun loadFromDb(): LiveData<List<AppointmentHistory>> {
                 return mAppointmentHistoryDao.loadUpcomingAppointments(Date())

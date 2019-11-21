@@ -18,6 +18,8 @@
     <string name="txt_time_slot">Time Slot</string>
     <string name="err_appointment_type">Select appointment type to proceed.</string>
     <string name="err_appointment_creation">Failed to book appointment, please try again later.</string>
+    <string name="err_user_update">Failed to update profile, please try again later.</string>
+    <string name="txt_user_update">Profile updated successfully.</string>
     <string name="txt_appointment_creation">Appointment booked successfully.</string>
     <string name="txt_appointment_history">Appointment History</string>
     <string name="txt_first_name">First Name</string>
@@ -33,4 +35,5 @@
     <string name="txt_payment_history">Payment History</string>
     <string name="txt_privacy_policy">Privacy Policy</string>
     <string name="txt_dot">·</string>
+    <string name="txt_no_records_found">No records found</string>
 </resources>

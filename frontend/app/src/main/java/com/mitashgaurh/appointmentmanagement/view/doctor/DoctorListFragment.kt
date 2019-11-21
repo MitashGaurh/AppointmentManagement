@@ -1,4 +1,4 @@
-package com.mitashgaurh.appointmentmanagement.view.appointmentHistory
+package com.mitashgaurh.appointmentmanagement.view.doctor
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,14 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mitashgaurh.appointmentmanagement.AppExecutors
 import com.mitashgaurh.appointmentmanagement.R
-import com.mitashgaurh.appointmentmanagement.databinding.FragmentAppointmentHistoryBinding
+import com.mitashgaurh.appointmentmanagement.databinding.FragmentDoctorListBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
-import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
 import com.mitashgaurh.appointmentmanagement.view.common.BackHandledFragment
-import com.mitashgaurh.appointmentmanagement.view.home.AppointmentHistoryAdapter
 import com.mitashgaurh.appointmentmanagement.view.home.HomeActivity
-import com.mitashgaurh.appointmentmanagement.vo.AppConstants
 import com.mitashgaurh.appointmentmanagement.vo.FragmentState
 import com.mitashgaurh.appointmentmanagement.vo.Status
 import javax.inject.Inject
@@ -27,7 +24,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class AppointmentHistoryFragment : BackHandledFragment(), Injectable {
+class DoctorListFragment : BackHandledFragment(), Injectable {
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
@@ -35,22 +32,22 @@ class AppointmentHistoryFragment : BackHandledFragment(), Injectable {
     @Inject
     lateinit var mAppExecutors: AppExecutors
 
-    private val mAppointmentHistoryViewModel: AppointmentHistoryViewModel by viewModels {
+    private val mDoctorViewModel: DoctorViewModel by viewModels {
         mViewModelFactory
     }
 
-    private var mBinding by autoCleared<FragmentAppointmentHistoryBinding>()
+    private var mBinding by autoCleared<FragmentDoctorListBinding>()
 
-    private var mAdapter by autoCleared<AppointmentHistoryAdapter>()
+    private var mAdapter by autoCleared<DoctorAdapter>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val dataBinding = DataBindingUtil.inflate<FragmentAppointmentHistoryBinding>(
+        val dataBinding = DataBindingUtil.inflate<FragmentDoctorListBinding>(
             inflater,
-            R.layout.fragment_appointment_history,
+            R.layout.fragment_doctor_list,
             container,
             false
         )
@@ -61,7 +58,6 @@ class AppointmentHistoryFragment : BackHandledFragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mAppointmentHistoryViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
 
         initRecyclerView()
 
@@ -69,26 +65,24 @@ class AppointmentHistoryFragment : BackHandledFragment(), Injectable {
     }
 
     private fun initRecyclerView() {
-        val adapter = AppointmentHistoryAdapter(mAppExecutors)
+        val adapter = DoctorAdapter(mAppExecutors)
 
         mAdapter = adapter
 
-        mBinding.rvAppointmentHistory.adapter = adapter
-        mBinding.rvAppointmentHistory.layoutManager = LinearLayoutManager(context)
+        mBinding.rvAvailableDoctors.adapter = adapter
+        mBinding.rvAvailableDoctors.layoutManager = LinearLayoutManager(context)
     }
 
     private fun subscribeToLiveData() {
-        mAppointmentHistoryViewModel.mAppointmentHistoryLiveData.observe(
-            viewLifecycleOwner,
-            Observer {
-                if (it.status == Status.SUCCESS && null != it.data && it.data.isNotEmpty()) {
-                    mBinding.emptyList = false
-                    mAdapter.submitList(it.data)
-                } else {
-                    mBinding.emptyList = true
-                    mAdapter.submitList(emptyList())
-                }
-            })
+        mDoctorViewModel.mAvailableDoctorsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it.status == Status.SUCCESS && null != it.data && it.data.isNotEmpty()) {
+                mBinding.emptyList = false
+                mAdapter.submitList(it.data)
+            } else {
+                mBinding.emptyList = true
+                mAdapter.submitList(emptyList())
+            }
+        })
     }
 
     override fun onBackPressed(): Boolean {

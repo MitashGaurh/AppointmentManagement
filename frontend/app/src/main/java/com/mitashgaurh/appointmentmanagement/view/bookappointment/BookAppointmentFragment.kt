@@ -171,6 +171,8 @@ class BookAppointmentFragment : BackHandledFragment(), Injectable {
                     getString(R.string.txt_appointment_creation),
                     Toast.LENGTH_SHORT
                 ).show()
+                PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_CREATED_APPOINTMENT] =
+                    true
                 requireActivity().onBackPressed()
             } else if (it.status == Status.ERROR) {
                 Toast.makeText(

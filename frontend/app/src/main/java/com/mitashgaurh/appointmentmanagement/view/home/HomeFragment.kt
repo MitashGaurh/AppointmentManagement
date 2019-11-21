@@ -15,11 +15,15 @@ import com.mitashgaurh.appointmentmanagement.AppExecutors
 import com.mitashgaurh.appointmentmanagement.R
 import com.mitashgaurh.appointmentmanagement.databinding.FragmentHomeBinding
 import com.mitashgaurh.appointmentmanagement.di.Injectable
+import com.mitashgaurh.appointmentmanagement.util.ActivityUtils
 import com.mitashgaurh.appointmentmanagement.util.PreferenceUtil
 import com.mitashgaurh.appointmentmanagement.util.autoCleared
+import com.mitashgaurh.appointmentmanagement.view.appointmentHistory.AppointmentHistoryFragment
 import com.mitashgaurh.appointmentmanagement.view.common.BackHandledFragment
 import com.mitashgaurh.appointmentmanagement.vo.AppConstants
+import com.mitashgaurh.appointmentmanagement.vo.FragmentState
 import com.mitashgaurh.appointmentmanagement.vo.Status
+import com.mitashgaurh.appointmentmanagement.vo.booleanLiveData
 import javax.inject.Inject
 
 
@@ -70,7 +74,22 @@ class HomeFragment : BackHandledFragment(), Injectable {
 
         initPendingPaymentsRecyclerView()
 
+        initializeViewEvents()
+
         subscribeToLiveData()
+    }
+
+    private fun initializeViewEvents() {
+        mBinding.btnSeeMoreAppointments.setOnClickListener {
+            (requireActivity() as HomeActivity).toggleFabBehavior(FragmentState.APPOINTMENT_HISTORY)
+            ActivityUtils.addFragmentToActivity(
+                requireActivity().supportFragmentManager,
+                AppointmentHistoryFragment(),
+                R.id.home_container,
+                true,
+                AppointmentHistoryFragment::class.java.simpleName
+            )
+        }
     }
 
     private fun initScheduledAppointmentRecyclerView() {
@@ -115,5 +134,13 @@ class HomeFragment : BackHandledFragment(), Injectable {
                 mPendingPaymentAdapter.submitList(emptyList())
             }
         })
+
+        PreferenceUtil.getSharePreferenceInstance(context!!)
+            .booleanLiveData(AppConstants.SharedPreferenceConstants.KEY_CREATED_APPOINTMENT, false)
+            .observe(this, Observer {
+                if (null != it && it == true) {
+                    mHomeViewModel.setStudentId(PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID, ""].toString())
+                }
+            })
     }
 }

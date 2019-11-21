@@ -3,7 +3,9 @@ package com.mitashgaurh.appointmentmanagement.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mitashgaurh.appointmentmanagement.view.appointmentHistory.AppointmentHistoryViewModel
+import com.mitashgaurh.appointmentmanagement.view.appointmentHistory.PaymentHistoryViewModel
 import com.mitashgaurh.appointmentmanagement.view.bookappointment.BookAppointmentViewModel
+import com.mitashgaurh.appointmentmanagement.view.doctor.DoctorViewModel
 import com.mitashgaurh.appointmentmanagement.view.home.HomeViewModel
 import com.mitashgaurh.appointmentmanagement.view.login.LoginViewModel
 import com.mitashgaurh.appointmentmanagement.view.profile.ProfileViewModel
@@ -40,6 +42,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AppointmentHistoryViewModel::class)
     abstract fun bindAppointmentHistoryViewModel(appointmentHistoryViewModel: AppointmentHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PaymentHistoryViewModel::class)
+    abstract fun bindPaymentHistoryViewModel(paymentHistoryViewModel: PaymentHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DoctorViewModel::class)
+    abstract fun bindDoctorViewModel(doctorViewModel: DoctorViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

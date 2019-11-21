@@ -90,6 +90,12 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector,
                 FragmentState.APPOINTMENT_HISTORY -> {
                     onBackPressed()
                 }
+                FragmentState.PAYMENT_HISTORY -> {
+                    onBackPressed()
+                }
+                FragmentState.AVAILABLE_DOCTORS -> {
+                    onBackPressed()
+                }
             }
         }
     }

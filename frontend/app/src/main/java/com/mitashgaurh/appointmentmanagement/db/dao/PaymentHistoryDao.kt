@@ -12,6 +12,9 @@ interface PaymentHistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(paymentHistory: PaymentHistory)
 
-    @Query("SELECT * FROM payment_history WHERE paymentStatus = 'Pending'")
+    @Query("SELECT * FROM payment_history WHERE paymentStatus = 'Pending' ORDER BY appointmentDate DESC")
     fun loadPendingPayments(): LiveData<List<PaymentHistory>>
+
+    @Query("SELECT * FROM payment_history ORDER BY appointmentDate DESC")
+    fun loadPaymentHistory(): LiveData<List<PaymentHistory>>
 }

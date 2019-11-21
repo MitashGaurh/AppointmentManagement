@@ -1,6 +1,7 @@
 package com.mitashgaurh.appointmentmanagement.api
 
 import androidx.lifecycle.LiveData
+import com.mitashgaurh.appointmentmanagement.db.entity.User
 import com.mitashgaurh.appointmentmanagement.vo.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -25,6 +26,9 @@ interface AppointmentManagementService {
     @GET("/getAvailableTimeSlots")
     fun fetchAvailableTimeSlots(): LiveData<ApiResponse<TimeSlotsResponse>>
 
+    @GET("/getAvailableDoctors")
+    fun fetchAvailableDoctors(): LiveData<ApiResponse<DoctorResponse>>
+
     @GET("/getAppointmentTypes")
     fun fetchAppointmentTypes(): LiveData<ApiResponse<AppointmentTypeResponse>>
 
@@ -33,4 +37,7 @@ interface AppointmentManagementService {
 
     @POST("/createNewAppointment")
     fun createNewAppointment(@Body createAppointmentRequest: CreateAppointmentRequest): Call<Any>
+
+    @POST("/updateStudentProfile")
+    fun updateUserProfile(@Body user: User): Call<Any>
 }

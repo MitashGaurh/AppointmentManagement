@@ -12,7 +12,8 @@ import com.mitashgaurh.appointmentmanagement.db.entity.*
         TimeSlot::class,
         AppointmentType::class,
         AppointmentReason::class,
-        PaymentHistory::class],
+        PaymentHistory::class,
+        Doctor::class],
     version = 1,
     exportSchema = false
 )
@@ -30,4 +31,6 @@ abstract class AppointmentManagementDb : RoomDatabase() {
     abstract fun appointmentReasonDao(): AppointmentReasonDao
 
     abstract fun paymentHistoryDao(): PaymentHistoryDao
+
+    abstract fun doctorDao(): DoctorDao
 }
