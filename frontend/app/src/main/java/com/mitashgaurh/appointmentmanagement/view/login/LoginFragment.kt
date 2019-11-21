@@ -75,7 +75,8 @@ class LoginFragment : Fragment(), Injectable {
             } else if (it.status == Status.SUCCESS && null != it.data) {
                 mBinding.showProgress = false
                 mBinding.btnLogin.background.alpha = 255
-                PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID] = it.data.studentId
+                PreferenceUtil[context!!, AppConstants.SharedPreferenceConstants.KEY_USER_ID] =
+                    it.data.studentId
                 startActivity(Intent(activity, HomeActivity::class.java))
                 activity?.finish()
             } else if (it.status == Status.ERROR) {
