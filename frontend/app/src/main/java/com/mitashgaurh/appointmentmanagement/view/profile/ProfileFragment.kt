@@ -166,6 +166,7 @@ class ProfileFragment : BackHandledFragment(), Injectable {
 
     private fun updateBindingUser(user: User) {
         mBinding.user = user
+        mBinding.etDob.tag = user.dateOfBirth
     }
 
     fun updateUserProfile() {

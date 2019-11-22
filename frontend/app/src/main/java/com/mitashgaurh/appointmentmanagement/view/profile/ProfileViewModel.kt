@@ -52,5 +52,4 @@ class ProfileViewModel
     fun setUpdateProfileRequest(user: User) {
         this.updateProfileRequestEvent.value = user
     }
-
 }
