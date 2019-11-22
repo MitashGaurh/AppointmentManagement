@@ -38,7 +38,7 @@ exports.getUserDetails = (req, res) => {
 
 exports.updateStudentProfile = (req, res) => {
     let query = "update students set first_name = ?, last_name = ?, email_id = ?, mobile_number = ?, " +
-        "address = ?, date_of_birth = ? where student_id = ?";
+        "address = ?, date_of_birth = str_to_date(?, '%M %d, %Y') where student_id = ?";
     let params = [req.param("firstName"), req.param("lastName"), req.param("emailId"),
         req.param("mobileNumber"), req.param("address"), req.param("dateOfBirth"), req.param("studentId")];
     mysql.query(query, params, (err, results) => {
