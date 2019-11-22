@@ -144,6 +144,7 @@ class ProfileFragment : BackHandledFragment(), Injectable {
                     cal.set(Calendar.MONTH, _monthOfYear)
                     cal.set(Calendar.DAY_OF_MONTH, _dayOfMonth)
                     mBinding.etDob.setText(SimpleDateFormat.getDateInstance().format(cal.time))
+                    mBinding.etDob.tag = cal.time
                     year = _year
                     month = _monthOfYear
                     day = _dayOfMonth
@@ -188,7 +189,7 @@ class ProfileFragment : BackHandledFragment(), Injectable {
                     mBinding.etEmail.text.toString(),
                     mBinding.etMobile.text.toString(),
                     mBinding.etAddress.text.toString(),
-                    SimpleDateFormat.getDateInstance().parse(mBinding.etDob.text.toString())!!
+                    mBinding.etDob.tag as Date
                 )
             )
         } else {
